@@ -1,28 +1,89 @@
 services:
-  dev:
-    container_name: sd-dev
-    build: dev
-    volumes:
-      - "./dev:/usr/src/app"
-    depends_on:
-      - db
-    ports:
-      - "3000:3000"
-      - "4000:4000"
 
-  db:
-    container_name: sd-db
-    build: db/prod
+  auth-db:
+    container_name: auth-db
+    build: docker/images/db
     volumes:
-      - pg_data:/var/lib/postgresql/data/
+      - auth_data:/var/lib/postgresql/data/
     ports:
-      - "6000:5432"
+      - "$AUTH_DB_PORT:5432"
+    networks:
+      - auth
 
-  db-test:
-    container_name: sd-test-db
-    build: db/test
+  auth-api:
+    container_name: auth-api
+    build: docker/images/javascript
+    networks:
+      - auth
+      - common
+    volumes:
+      - ./src/auth-api:/app
     ports:
-      - "6001:5432"
+      - "$AUTH_API_PORT:80"
+    environment:
+      - USE_DEV_MODE
+      - PORT=80
+
+  bl-db:
+    container_name: bl-db
+    build: docker/images/db
+    volumes:
+      - bl_data:/var/lib/postgresql/data/
+    ports:
+      - "$BL_DB_PORT:5432"
+    networks:
+      - bl
+
+  bl-api:
+    container_name: bl-api
+    build: docker/images/javascript
+    networks:
+      - bl
+      - common
+    volumes:
+      - ./src/bl-api:/app
+    ports:
+      - "$BL_API_PORT:80"
+      - "$SWAGGER_PORT:8080"
+    environment:
+      - USE_DEV_MODE
+      - PORT=80
+      - SWAGGER_PORT=8080
+      - DATABASE_URL=postgresql://sd:sd@bl-db:5432/sd?schema=public
+
+  importer:
+    container_name: importer
+    build: docker/images/elixir
+    networks:
+      - bl
+    volumes:
+      - ./docker/volumes/importer:/data
+      - ./src/importer:/app
+    environment:
+      - USE_DEV_MODE
+
+  frontend:
+    container_name: frontend
+    build: docker/images/javascript
+    networks:
+      - common
+    volumes:
+      - ./src/web:/app
+    ports:
+      - "$FRONTEND_PORT:80"
+    environment:
+      - USE_DEV_MODE
+      - PORT=80
+      - REACT_APP_API_URL=http://localhost:$BL_API_PORT
+
+networks:
+  common:
+    driver: bridge
+  auth:
+    driver: bridge
+  bl:
+    driver: bridge
 
 volumes:
-  pg_data:
+  auth_data:
+  bl_data:
