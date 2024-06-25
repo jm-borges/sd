@@ -55,7 +55,7 @@ services:
 
   importer:
     container_name: importer
-    build: docker/images/elixir
+    build: docker/images/javascript
     networks:
       - bl
     volumes:
