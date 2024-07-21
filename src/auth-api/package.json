@@ -6,14 +6,26 @@
   "scripts": {
     "start": "node index.js",
     "watch": "nodemon index.js",
-    "migrate": "knex migrate:latest --env db"
+    "migrate": "knex migrate:latest --env db",
+    "test:setup": "docker-compose -f docker-compose.test.yml up -d",
+    "test:teardown": "docker-compose -f docker-compose.test.yml down",
+    "test": "npm run test:setup && mocha --timeout 5000 --require ./test/setup.js && npm run test:teardown"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
-    "express": "^4.18.2",
-    "knex": "^3.0.1",
-    "pg": "^8.11.3"
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.2",
+    "knex": "^3.1.0",
+    "pg": "^8.12.0",
+    "sqlite3": "^5.1.7"
+  },
+  "devDependencies": {
+    "chai": "^5.1.1",
+    "mocha": "^10.6.0",
+    "supertest": "^7.0.0"
   }
 }

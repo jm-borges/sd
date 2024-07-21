@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -10,12 +7,19 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Teacher {
-  name       String   @id
-  city       String
-  createdOn  DateTime @default(now()) @map("created_on")
-  updatedOn  DateTime @updatedAt @map("updated_on")
-
-  @@map("teachers")
+model Prize {
+  id        String     @id @default(uuid())
+  year      String
+  category  String
+  laureates Laureate[]
 }
 
+model Laureate {
+  id        String     @id @default(uuid())
+  firstname String
+  surname   String
+  motivation String
+  share     String
+  prizeId   String
+  prize     Prize      @relation(fields: [prizeId], references: [id])
+}

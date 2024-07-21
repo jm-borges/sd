@@ -1,8 +1,9 @@
 import { Injectable } from '@nestjs/common';
+import { PrizesService } from './prizes/prizes.service';
 
 @Injectable()
 export class AppService {
-  getHello(): string {
-    return 'Hello World!';
-  }
+  constructor(private readonly prizesService: PrizesService) { }
+
+
 }

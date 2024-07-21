@@ -1,5 +1,4 @@
 version: "3.8"
-name: sd
 services:
 
   auth-db:
@@ -22,6 +21,8 @@ services:
       - ./src/auth-api:/app
     ports:
       - "$AUTH_API_PORT:80"
+    env_file:
+      - .env
     environment:
       - USE_DEV_MODE
       - PORT=80
@@ -47,6 +48,8 @@ services:
     ports:
       - "$BL_API_PORT:80"
       - "$SWAGGER_PORT:8080"
+    env_file:
+      - .env
     environment:
       - USE_DEV_MODE
       - PORT=80
@@ -80,7 +83,7 @@ services:
 
 networks:
   common:
-    driver: bridge
+    driver: bridge 
   auth:
     driver: bridge
   bl:
