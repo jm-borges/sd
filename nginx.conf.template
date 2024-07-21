@@ -1,11 +1,9 @@
 events {}
 
 http {
-    # Configuração para as APIs
     server {
         listen 80;
 
-        # Configuração para a auth-api
         location /login {
             proxy_pass http://auth-api:80/login;
             proxy_set_header Host $host;
@@ -30,7 +28,6 @@ http {
             proxy_set_header X-Forwarded-Proto $scheme;
         }
 
-        # Configuração para todos os demais endpoints
         location / {
             proxy_pass http://bl-api:80/;
             proxy_set_header Host $host;
@@ -40,9 +37,8 @@ http {
         }
     }
 
-    # Configuração específica para a documentação do Swagger
     server {
-        listen 8081;
+        listen ${SWAGGER_PORT};
 
         location / {
             proxy_pass http://bl-api:80/api/; 

@@ -1,0 +1,354 @@
+{
+	"info": {
+		"_postman_id": "e03e6937-2b7e-4ffc-a473-08d1863083ce",
+		"name": "Sistemas distribuidos",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16821966"
+	},
+	"item": [
+		{
+			"name": "Business Logic",
+			"item": [
+				{
+					"name": "Laureates",
+					"item": [
+						{
+							"name": "Get Laureates",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/laureates",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"laureates"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Find Laureate",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/laureates/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"laureates",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Laureate",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/laureates",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"laureates"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Laureate",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"category\": \"chemistry\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/prizes/28430a83-a55e-420b-9557-fa94ac4f8cdf",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"prizes",
+										"28430a83-a55e-420b-9557-fa94ac4f8cdf"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Laureate",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/prizes/28430a83-a55e-420b-9557-fa94ac4f8cdf",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"prizes",
+										"28430a83-a55e-420b-9557-fa94ac4f8cdf"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Prizes",
+					"item": [
+						{
+							"name": "Get Prizes",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIiLCJyb2xlIjoidmlldyIsImlhdCI6MTcyMTU2Nzk2MCwiZXhwIjoxNzIxNTcxNTYwfQ.NFWQKPw5wB0_4CIayvs5OydEqCjgpNA7wFs5wHgrd78",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/prizes",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"prizes"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Find Prize",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/prizes/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"prizes",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Prize",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIyIiwicm9sZSI6ImVkaXQiLCJpYXQiOjE3MjE1NjgwMDYsImV4cCI6MTcyMTU3MTYwNn0.-Z2QQVNXeymIcjCplfKvw41cQ38un-mTxb9SYy2hqW0",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"year\": \"2024\",\r\n    \"category\": \"Physics\",\r\n    \"laureates\": [\r\n        {\r\n            \"firstname\": \"Alice\",\r\n            \"surname\": \"Smith\",\r\n            \"motivation\": \"For contributions to quantum mechanics\",\r\n            \"share\": \"50%\",\r\n            \"prizeId\": \"1\"\r\n        },\r\n        {\r\n            \"firstname\": \"Bob\",\r\n            \"surname\": \"Johnson\",\r\n            \"motivation\": \"For contributions to quantum entanglement\",\r\n            \"share\": \"50%\",\r\n            \"prizeId\": \"1\"\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/prizes",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"prizes"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Prize",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"category\": \"chemistry\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/prizes/28430a83-a55e-420b-9557-fa94ac4f8cdf",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"prizes",
+										"28430a83-a55e-420b-9557-fa94ac4f8cdf"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Prize",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/prizes/28430a83-a55e-420b-9557-fa94ac4f8cdf",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"prizes",
+										"28430a83-a55e-420b-9557-fa94ac4f8cdf"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Docs",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081"
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"user\",\r\n    \"password\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:18080/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "18080",
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"user2\",\r\n    \"password\": \"123456\",\r\n    \"role\": \"edit\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
