@@ -1,11 +1,11 @@
-import TopTeams from "../Menus/TopTeams";
+import Prizes from "../Menus/Prizes";
 
 const Sections = [
 
     {
-        id: "top-teams",
-        label: "Top Teams",
-        content: <TopTeams/>
+        id: "prizes",
+        label: "Prizes",
+        content: <Prizes />
     },
 
     {

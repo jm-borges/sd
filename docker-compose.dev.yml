@@ -5,6 +5,8 @@ services:
     build: docker/images/db
     volumes:
       - auth_data:/var/lib/postgresql/data/
+    ports:
+      - "$AUTH_DB_PORT:5432"
     networks:
       - auth
 
@@ -16,9 +18,12 @@ services:
       - common
     volumes:
       - ./src/auth-api:/app
+    ports:
+      - "$AUTH_API_PORT:80"
     env_file:
       - .env
     environment:
+      - USE_DEV_MODE
       - PORT=80
 
   bl-db:
@@ -26,6 +31,8 @@ services:
     build: docker/images/db
     volumes:
       - bl_data:/var/lib/postgresql/data/
+    ports:
+      - "$BL_DB_PORT:5432"
     networks:
       - bl
 
@@ -37,9 +44,13 @@ services:
       - common
     volumes:
       - ./src/bl-api:/app
+    ports:
+      - "$BL_API_PORT:80"
+      - "$SWAGGER_PORT:8080"
     env_file:
       - .env
     environment:
+      - USE_DEV_MODE
       - PORT=80
       - SWAGGER_PORT=8080
       - DATABASE_URL=postgresql://sd:sd@bl-db:5432/sd?schema=public
@@ -58,6 +69,7 @@ services:
       - ./docker/volumes/importer:/data
       - ./src/importer:/app
     environment:
+      - USE_DEV_MODE
       - DB_USER=sd
       - DB_HOST=bl-db
       - DB_NAME=sd
@@ -77,21 +89,9 @@ services:
     ports:
       - "$FRONTEND_PORT:80"
     environment:
+      - USE_DEV_MODE
       - PORT=80
       - REACT_APP_API_URL=http://localhost:$BL_API_PORT
-
-  nginx:
-    image: nginx:alpine
-    container_name: nginx
-    volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf
-    ports:
-      - "8080:80"
-      - "8081:8081"
-    networks:
-      - common
-      - auth
-      - bl
 
 networks:
   common:
